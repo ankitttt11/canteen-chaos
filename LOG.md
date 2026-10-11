@@ -12,24 +12,25 @@ Delete the example before you submit.
 
 ### CC-01 — "The search suggestions are behind everything"
 
-**Reproduced:** Typed `sa` into the menu search box. The suggestion list
-appeared, but the category bar covered the top of the list. The visible
-suggestions could be opened, but the dropdown was displayed behind the
-category bar.
+**Reproduced:** I typed `sa` in the search box. The suggestions appeared,
+but the category bar covered the top of the list. This made the dropdown look
+partly hidden. The visible suggestions could still be opened.
 
-**Cause:** The sticky `.filters` and `.cat-tabs` elements use `z-index: 40`.
-The suggestions are inside `.search-wrap`, which created a lower stacking
-context with `z-index: 1`. The `.suggest-box` had `z-index: 100`, but that
-value could not place it above the higher-level sibling stacking context.
+**Cause:** The category bar was given a higher CSS display layer
+(`z-index: 40`) than the search area (`z-index: 1`). The suggestion box had
+its own high layer (`z-index: 100`), but it was still inside the lower-layer
+search area. Because of this, the category bar appeared in front of it.
 
-**Fix:** Changed `.search-wrap` from `z-index: 1` to `z-index: 50` in
-`frontend/style.css`. This places the search wrapper, including its
-suggestion dropdown, above the category bar.
+**Fix:** I changed the search area’s `z-index` from `1` to `50` in
+`frontend/style.css`. This puts the complete search area above the category
+bar, so its suggestions can be seen properly.
 
-**Checked:** Refreshed the application, searched for `sa`, and confirmed
-that the complete suggestion list appeared above the category bar. Opened
-both the top suggestion (`Samosa`) and the bottom suggestion (`Masala Dosa`)
-successfully.
+**Checked:** I refreshed the application and searched for `sa` again. The
+complete suggestion list appeared above the category bar. I clicked the top
+suggestion, `Samosa`, and the bottom suggestion, `Masala Dosa`; both opened
+the correct dish details.
+
+**Time:** Not recorded.
 
 **Time:** Not recorded.
 
