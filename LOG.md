@@ -35,6 +35,28 @@ the correct dish details.
 **Time:** Not recorded.
 
 
+### CC-02 — "Can't read anything in dark mode"
+
+**Reproduced:** I checked the `Grilled Sandwich` card in light mode and
+could read its name and price. After switching to dark mode, the name and
+price became almost invisible. Other text, such as the grey details line,
+was still visible.
+
+**Cause:** The dish body had a fixed dark-brown text color. That fixed color
+worked in light mode, but it stayed dark when the page changed to dark mode.
+It ignored the theme’s normal text color.
+
+**Fix:** Changed the dish body color from `#2b2118` to `var(--ink)` in
+`frontend/style.css`. `var(--ink)` automatically uses the correct text color
+for the selected theme.
+
+**Checked:** Refreshed the application and checked `Grilled Sandwich` and
+`Rs. 34` in both themes. The dish name and price were readable in light mode
+and dark mode.
+
+**Time:** Not recorded.
+
+
 ## CC-0X — "<the complaint, in short>"
 
 **Reproduced:**
