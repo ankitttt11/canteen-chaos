@@ -137,6 +137,13 @@ the dish stock.
 **Checked:** Retried checkout with 5 items while only 3 were available. The
 order was rejected with `Invalid order: Dal Tadka Thali: only 3 left`.
 
+**Additional improvement:** Added a frontend stock limit in
+`frontend/js/state.js`. The cart now also stops increasing when its quantity
+reaches the available stock. The backend validation remains in place because
+frontend checks can be bypassed. I tested it with 3 available items: the
+quantity stayed at 3 and the app showed `Only 3 left` when I tried to add a
+fourth.
+
 **Time:** Not recorded.
 
 
