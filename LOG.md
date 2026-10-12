@@ -120,6 +120,26 @@ them.
 **Time:** Not recorded.
 
 
+### CC-06 — "I ordered more than they had"
+
+**Reproduced:** The menu showed only 3 `Dal Tadka Thali` left, but the cart
+allowed a quantity of 5. I continued to checkout and tried to place the
+order.
+
+**Cause:** The backend checked only whether stock was zero. It did not check
+whether the requested quantity was greater than the available stock. This
+allowed an order for 5 items when only 3 were available.
+
+**Fix:** Added a backend validation check in `backend/logic/validation.js`.
+The server now rejects the order when the requested quantity is greater than
+the dish stock.
+
+**Checked:** Retried checkout with 5 items while only 3 were available. The
+order was rejected with `Invalid order: Dal Tadka Thali: only 3 left`.
+
+**Time:** Not recorded.
+
+
 ## CC-0X — "<the complaint, in short>"
 
 **Reproduced:**
