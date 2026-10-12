@@ -165,6 +165,25 @@ from stock. Cancellation should return the reserved item to the stock.
 **Time:** Not recorded.
 
 
+### CC-08 — "An old coupon still works"
+
+**Reproduced:** I added a dish to the cart, opened checkout, and applied the
+coupon `FRESHERS24`. The coupon was expired, but the checkout accepted it and
+gave a discount.
+
+**Cause:** The coupon list endpoint checked the expiry date, but the pricing
+function that actually calculated the discount did not check `expiresAt`.
+Therefore, a user could still send the old coupon code directly.
+
+**Fix:** Added an expiry-date check to `backend/logic/pricing.js`. A coupon
+is now rejected when its expiry date is today or earlier.
+
+**Checked:** Applied `FRESHERS24` again after restarting the server. The app
+showed `This coupon has expired` and gave no coupon discount.
+
+**Time:** Not recorded.
+
+
 ### Supporting fix — "My Orders showed no orders"
 
 **Reproduced:** After placing an order, the browser saved the order token,
