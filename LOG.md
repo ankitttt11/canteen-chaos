@@ -264,38 +264,11 @@ fixture at a known open time. Each run passed `90 passed, 0 failed`, and the
 two runs created different keyed orders.
 
 **Time:** Not recorded.
-## CC-0X — "<the complaint, in short>"
-
-**Reproduced:**
-
-**Cause:**
-
-**Fix:**
-
-**Checked:**
-
-**Time:**
+ 
 
 
 
-## Could not fix
-
-For anything you investigated but did not solve. Say what you tried and
-where you got to. This is worth marks — leaving it blank when you got
-stuck is not.
-
-### CC-0X — "<the complaint>"
-
-**What I tried:**
-
-**Where I got to:**
-
-**What I would try next:**
+ 
 
 
 
-## Extra credit
-
-Anything not on the bug log: a problem you found yourself, a test you
-wrote, or a fix you are unsure about. Same format, plus one line on how
-you noticed it.
