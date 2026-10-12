@@ -32,8 +32,6 @@ the correct dish details.
 
 **Time:** Not recorded.
 
-**Time:** Not recorded.
-
 
 ### CC-02 — "Can't read anything in dark mode"
 
@@ -244,6 +242,28 @@ order appeared in My Orders.
 **Time:** Not recorded.
 
 
+### Verification fixes — smoke test stability
+
+**Reproduced:** The repository smoke test initially reported failures even
+though the assigned bug fixes worked. The test reused one fixed idempotency
+key across runs, so the server returned an old order instead of creating a
+new one. The order state checks also could not move an order from `ready` to
+`picked`.
+
+**Cause:** `backend/smoke.js` used the same literal request key every time.
+Also, `ready` was incorrectly treated as a terminal status in
+`backend/logic/status.js`, even though the normal flow includes collection
+after preparation.
+
+**Fix:** Made the smoke-test key unique per run while keeping both requests
+in the same run identical. Removed `ready` from the terminal statuses so the
+valid `ready -> picked` transition is allowed.
+
+**Checked:** Ran the complete smoke test twice against an isolated in-memory
+fixture at a known open time. Each run passed `90 passed, 0 failed`, and the
+two runs created different keyed orders.
+
+**Time:** Not recorded.
 ## CC-0X — "<the complaint, in short>"
 
 **Reproduced:**

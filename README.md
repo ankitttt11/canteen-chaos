@@ -5,14 +5,15 @@ dishes to a cart, apply coupons, pick a collection time and place an
 order. Staff watch the queue on a counter dashboard and move orders
 along.
 
-It works — mostly. Some things in it are broken, and your job is to
-find and fix the ones you are given.
+This repository contains the completed debugging work for the Byte Web
+Development recruitment task. The assigned bugs and investigation notes are
+recorded in `BUGS_LOG.md` and `LOG.md`.
 
 
 
 ## Running it
 
-```bash
+```powershell
 cd backend
 npm install
 npm start
@@ -25,8 +26,9 @@ The canteen has opening hours (7:00 AM – 10:00 PM) and meal slots, so
 outside those hours most dishes show as "not served now". If you are
 working late:
 
-```bash
-TZ=Pacific/Auckland npm start
+```powershell
+$env:TZ = "Pacific/Auckland"
+npm start
 ```
 
 Other settings, all optional:
@@ -36,6 +38,35 @@ Other settings, all optional:
 | `LATENCY_MS` | 250 | Delay added to every API call. Set `0` for instant responses. |
 | `AUTO_COOK` | true | Orders move along by themselves. |
 | `ORDER_RATE_MAX` | 40 | Orders per minute before you get rate limited. |
+
+To run the backend smoke checks, keep the server running in one terminal and
+run this from the repository root in another terminal:
+
+```powershell
+node backend/smoke.js
+```
+
+The smoke test controls order status transitions itself, so start the server
+with automatic cooking disabled:
+
+```powershell
+$env:AUTO_COOK = "false"
+npm start
+```
+
+The verified regression run completed with `90 passed, 0 failed` using an
+isolated in-memory data fixture. Restore tracked menu test data with:
+
+```powershell
+git restore backend/data/menu.json
+```
+
+## Debugging record
+
+The ten assigned bugs are documented in `LOG.md`. Each entry records the
+observed behavior, reproduction steps, root cause, fix, and verification.
+An additional `My Orders` lookup problem was found during testing and is
+documented separately as a supporting fix.
 
 
 
