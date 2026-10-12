@@ -68,6 +68,14 @@ observed behavior, reproduction steps, root cause, fix, and verification.
 An additional `My Orders` lookup problem was found during testing and is
 documented separately as a supporting fix.
 
+## Live demo
+
+The deployed application is available at:
+
+https://canteen-chaos-gp99.onrender.com
+
+The URL was checked after deployment and returned HTTP status `200`.
+
 
 
 ## What is in the repo
