@@ -78,6 +78,26 @@ wrapped correctly, the card stayed inside the phone width, and the complete
 **Time:** Not recorded.
 
 
+### CC-04 — "The buttons don't work on my tablet"
+
+**Reproduced:** I opened the site in Chrome's iPad Mini view. Clicking
+`Add to Cart` and the favourite star did not produce any visible result.
+
+**Cause:** At tablet widths, invisible `::after` layers were placed over the
+dish cards. These layers had a higher display layer (`z-index`) than the
+buttons and received the clicks instead. The buttons' JavaScript was not the
+problem; the clicks never reached it.
+
+**Fix:** Added `pointer-events: none` to the tablet overlay rule in
+`frontend/style.css`. This makes the invisible layers ignore clicks so the
+buttons underneath can receive them.
+
+**Checked:** Refreshed the iPad Mini view and clicked `Add to Cart`. The cart
+count increased. I also clicked a favourite star and saw the saved message.
+
+**Time:** Not recorded.
+
+
 ## CC-0X — "<the complaint, in short>"
 
 **Reproduced:**

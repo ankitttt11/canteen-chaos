@@ -1037,6 +1037,7 @@ body.is-offline .site-header { filter: grayscale(0.4); }
     content: "";
     position: absolute;
     background: transparent;
+    pointer-events: none;
     transition: background 0.2s;
   }
 
