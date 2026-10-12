@@ -57,6 +57,27 @@ and dark mode.
 **Time:** Not recorded.
 
 
+### CC-03 — "The menu is wider than my phone"
+
+**Reproduced:** I used Chrome’s mobile view at `320px` wide and searched for
+`Paneer`. The long dish name was cut off and the card extended beyond the
+phone preview. The card and its `Add to Cart` button did not fit correctly.
+
+**Cause:** On small screens, `.name-btn` used `width: max-content`. This
+means the button tried to stay as wide as the complete dish name. A long
+dish name could therefore make the menu card wider than the phone.
+
+**Fix:** Changed the mobile `.name-btn` rule to `width: 100%; min-width: 0`
+in `frontend/style.css`. This makes the name fit inside the card and wrap to
+the next line when needed.
+
+**Checked:** Tested the same long dish at `320px` and `375px`. The name
+wrapped correctly, the card stayed inside the phone width, and the complete
+`Add to Cart` button was visible.
+
+**Time:** Not recorded.
+
+
 ## CC-0X — "<the complaint, in short>"
 
 **Reproduced:**
