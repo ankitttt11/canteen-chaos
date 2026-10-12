@@ -204,6 +204,27 @@ additional pages as expected.
 **Time:** Not recorded.
 
 
+### CC-10 — "Sorting by price is backwards"
+
+**Reproduced:** I selected `Price: low to high` and saw the most expensive
+dishes first. I then selected `Price: high to low` and saw the cheaper dishes
+first instead.
+
+**Cause:** The two price comparison functions in `backend/logic/search.js`
+were reversed. The low-to-high function compared prices in descending order,
+and the high-to-low function compared them in ascending order.
+
+**Fix:** Swapped the two comparison expressions so `price-asc` uses
+`a.price - b.price` and `price-desc` uses `b.price - a.price`.
+
+**Checked:** Verified the backend responses directly. Low-to-high began with
+`Rs. 16.50`, `Rs. 21`, and `Rs. 23`. High-to-low began with `Rs. 138.50`,
+`Rs. 135`, and `Rs. 133`. The browser also showed the high-to-low status with
+first price `Rs. 138.50`.
+
+**Time:** Not recorded.
+
+
 ### Supporting fix — "My Orders showed no orders"
 
 **Reproduced:** After placing an order, the browser saved the order token,
