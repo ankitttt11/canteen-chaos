@@ -184,6 +184,26 @@ showed `This coupon has expired` and gave no coupon discount.
 **Time:** Not recorded.
 
 
+### CC-09 — "The menu shows more dishes than it should"
+
+**Reproduced:** After opening the menu, the page requested a page size of 5
+but displayed all 37 dishes immediately. The status showed more dishes than
+the requested first page.
+
+**Cause:** The backend pagination function correctly created a five-item
+`items` array, but returned the original full list instead of that array.
+The frontend therefore received all dishes for every page request.
+
+**Fix:** Changed the return value in `backend/logic/search.js` from
+`items: list` to `items`. Each request now returns only its requested page.
+
+**Checked:** Refreshed the menu and confirmed the initial status showed
+`Showing 5 dishes · requested page size 5 · total 37`. Scrolling then loaded
+additional pages as expected.
+
+**Time:** Not recorded.
+
+
 ### Supporting fix — "My Orders showed no orders"
 
 **Reproduced:** After placing an order, the browser saved the order token,
