@@ -147,6 +147,43 @@ fourth.
 **Time:** Not recorded.
 
 
+### CC-07 — "Cancelling makes it worse"
+
+**Reproduced:** Rajma Chawal had 23 items in stock. I placed an order for
+one, so the stock became 22. I then cancelled that order. Instead of going
+back to 23, the stock went down again.
+
+**Cause:** The cancellation function was subtracting the cancelled quantity
+from stock. Cancellation should return the reserved item to the stock.
+
+**Fix:** Changed the cancellation calculation in
+`backend/logic/validation.js` from subtracting the quantity to adding it.
+
+**Checked:** Placed one Rajma Chawal order and confirmed stock changed from
+23 to 22. Cancelled the order and confirmed stock returned to 23.
+
+**Time:** Not recorded.
+
+
+### Supporting fix — "My Orders showed no orders"
+
+**Reproduced:** After placing an order, the browser saved the order token,
+but the My Orders page showed `No orders found`. The Counter page could still
+see the order.
+
+**Cause:** The frontend sent a `memberId` query parameter. The backend
+received it but compared orders against `req.query.userId`, which was empty.
+Therefore, no order matched the current member.
+
+**Fix:** Changed the backend filter to compare the order’s member ID with
+`req.query.memberId` in `backend/routes/orders.routes.js`.
+
+**Checked:** After restarting the server and placing a fresh order, the
+order appeared in My Orders.
+
+**Time:** Not recorded.
+
+
 ## CC-0X — "<the complaint, in short>"
 
 **Reproduced:**
