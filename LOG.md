@@ -98,6 +98,28 @@ count increased. I also clicked a favourite star and saw the saved message.
 **Time:** Not recorded.
 
 
+### CC-05 — "The category bar scrolls away on my phone"
+
+**Reproduced:** I opened the site in iPhone SE view and scrolled down through
+the menu. The dish cards moved up, but the category and filter bar also
+scrolled away instead of staying available at the top.
+
+**Cause:** On small screens, `.view` used `overflow-x: hidden`. This made the
+menu view act like a scrolling container. The sticky filter bar then used
+that container instead of the browser window, so it did not remain visible
+while the page was scrolled.
+
+**Fix:** Changed the mobile `.view` rule from `overflow-x: hidden` to
+`overflow-x: clip` in `frontend/style.css`. This still clips horizontal
+overflow without interfering with the sticky filter bar.
+
+**Checked:** Refreshed the iPhone SE view and scrolled through the menu. The
+filter buttons and category tabs stayed visible while the dishes moved below
+them.
+
+**Time:** Not recorded.
+
+
 ## CC-0X — "<the complaint, in short>"
 
 **Reproduced:**
